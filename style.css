@@ -25,15 +25,10 @@ body {
     justify-content: center;
     align-items: center;
     padding: 1rem 2rem;
-    /* background-image: url(https://t4.ftcdn.net/jpg/03/43/78/67/360_F_343786732_dKQoM3xK3jyoGKroom9b3t6K8zmZl27E.jpg);
-    background-size: cover;
-    background-position: center; */
-    /* box-shadow: 0 1px 10px black; */
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
 }
 
 #header h1
@@ -94,7 +89,7 @@ body {
 #main
 {
     /* border: 1px solid black; */
-    margin-top: 150px;
+    margin-top: 70px;
     width: 700px;
     height: 400px;
     display: flex;
