@@ -95,7 +95,7 @@ body {
 {
     /* border: 1px solid black; */
     margin-top: 150px;
-    width: 80%;
+    width: 700px;
     height: 400px;
     display: flex;
     /* border-radius: 15px; */
@@ -183,9 +183,35 @@ body {
 {
     margin-top: 20px;
 }
-   
-   
-   
-   
-   
-   
+
+
+#socials
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.sig
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: #000000 1px solid;
+    border-radius: 15px;
+    margin: 10px;
+    width: 150px;
+}
+
+.icons img:hover
+{
+    scale: 1.1;
+    transition: all 0.3s ease;
+}
+
+.icons img
+{
+    transition: all 0.3s ease;
+}

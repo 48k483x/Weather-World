@@ -16,23 +16,38 @@
     </div>
     <div id="main">
         <div id="time">
-            <p id="h-m">14:36</p>
-            <p id="date">NOV.10  TUE</p>
-            <p id="city">MARRAKECH</p>
+            <p id="h-m"></p>
+            <p id="date"></p>
+            <p id="city"></p>
         </div>
         <div id="weather">
-            <p id="temp">12°C</p>
-            <p id="desc">Foggy</p>
-            <div id="min-max">
-                <p id="min">12°C</p>
-                <p>~</p>
-                <p id="max">15°C</p>
+            <p id="temp"></p>
+            <p id="desc"></p>
+            <div id="min-max"> <p id="min"></p><p>~</p><p id="max"></p></div>
+            <div id="w-icn"></div>
+        </div>
+    </div>
+    <div id="socials">
+        <div class="sig">
+            <h3>DESIGNER</h3>
+            <div class="icons">
+                <a href="https://www.linkedin.com/in/abdelilah-mousaid-a1a7b0247/">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="linkedin"/>
+                </a>
+                <a href="https://github.com/26TOXIC26">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="github"/>
+                </a>
             </div>
-            <div id="w-icn">
-                <!-- <img width="50" height="50" src="https://img.icons8.com/ios/50/cloud--v2.png" alt="cloud--v2"/>            
-                <img width="50" height="50" src="https://img.icons8.com/ios/50/heavy-rain.png" alt="cloud--v2"/>            
-                <img width="50" height="50" src="https://img.icons8.com/ios/50/snow.png" alt="cloud--v2"/>             -->
-                <img width="50" height="50" src="https://img.icons8.com/ios/50/sun.png" alt="cloud--v2"/>            
+        </div>
+        <div class="sig">
+            <h3>DEVELOPER</h3>
+            <div class="icons">
+                <a href="https://www.linkedin.com/in/abdurrahman-chahrour-bb0865265/">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="linkedin"/>
+                </a>
+                <a href="https://github.com/48k483x">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="github"/>
+                </a>
             </div>
         </div>
     </div>
@@ -48,24 +63,24 @@
     const foggy = document.getElementById('desc');
     const icon = document.getElementById('w-icn');
     const date = document.getElementById('date');
-
+    
     const apiKey = 'e7814ae3f08501a73de9461e93c075ef';
     const url = 'https://api.openweathermap.org/data/2.5/weather?q=';
     const units = 'metric';
-
+    
     function addLeadingZero(number) {
-    return number < 10 ? '0' + number : number;
-}
-
-function getTime() {
-    const date = new Date();
-    const hours = addLeadingZero(date.getHours());
+        return number < 10 ? '0' + number : number;
+    }
+    
+    function getTime() {
+        const date = new Date();
+        const hours = addLeadingZero(date.getHours());
     const minutes = addLeadingZero(date.getMinutes());
     time.textContent = `${hours}:${minutes}`;
 };
 
     function getDate() {
-        let date = new Date();  // Create a new Date object
+        let date = new Date(); 
 
         let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         let dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -98,9 +113,9 @@ function getTime() {
     }
     getWeather('Marrakech');
     city.addEventListener('keydown', function(e) {
-        if (e.keyCode === 13) {  // 13 is the key code for Enter
-            e.preventDefault();  // Prevent the default action (form submission)
-            getWeather(city.value);  // Call your function to get the weather
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            getWeather(city.value); 
     }
     });
     getTime();
