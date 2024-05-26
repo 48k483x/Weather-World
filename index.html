@@ -24,9 +24,9 @@
             <p id="temp">12°C</p>
             <p id="desc">Foggy</p>
             <div id="min-max">
-                <p id="max-t">12°C</p>
+                <p id="min">12°C</p>
                 <p>~</p>
-                <p id="min-t">15°C</p>
+                <p id="max">15°C</p>
             </div>
             <div id="w-icn">
                 <!-- <img width="50" height="50" src="https://img.icons8.com/ios/50/cloud--v2.png" alt="cloud--v2"/>            
@@ -37,4 +37,75 @@
         </div>
     </div>
 </body>
+
+<script>
+    const city = document.getElementById('search');
+    const cityName = document.getElementById('city');
+    const temperature = document.getElementById('temp');
+    const min = document.getElementById('min');
+    const max = document.getElementById('max');
+    const time = document.getElementById('h-m');
+    const foggy = document.getElementById('desc');
+    const icon = document.getElementById('w-icn');
+    const date = document.getElementById('date');
+
+    const apiKey = 'e7814ae3f08501a73de9461e93c075ef';
+    const url = 'https://api.openweathermap.org/data/2.5/weather?q=';
+    const units = 'metric';
+
+    function addLeadingZero(number) {
+    return number < 10 ? '0' + number : number;
+}
+
+function getTime() {
+    const date = new Date();
+    const hours = addLeadingZero(date.getHours());
+    const minutes = addLeadingZero(date.getMinutes());
+    time.textContent = `${hours}:${minutes}`;
+};
+
+    function getDate() {
+        let date = new Date();  // Create a new Date object
+
+        let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        let dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+        let month = monthNames[date.getMonth()];
+        let day = date.getDate();
+        let dayOfWeek = dayNames[date.getDay()];
+
+        let formattedDate = `${month}.${day} ${dayOfWeek}`;
+        return formattedDate;
+    }
+    async function getWeather(cityN) {
+        const response = await fetch(`${url}${cityN}&appid=${apiKey}&units=${units}`);
+        const data = await response.json();
+        console.log(data);
+        cityName.textContent = data.name;
+        foggy.textContent = data.weather[0].main;
+        temperature.textContent = Math.floor(data.main.temp) + '°C';
+        min.textContent = Math.floor(data.main.temp_min) + '°C';
+        max.textContent = (Math.floor(data.main.temp_max) + 2) + '°C';
+        if (data.weather[0].main === 'Clouds') {
+            icon.innerHTML = `<img width="50" height="50" src="https://img.icons8.com/ios/50/cloud--v2.png" alt="cloud--v2"/>`;
+        } else if (data.weather[0].main === 'Rain') {
+            icon.innerHTML = `<img width="50" height="50" src="https://img.icons8.com/ios/50/heavy-rain.png" alt="cloud--v2"/>`;
+        } else if (data.weather[0].main === 'Snow') {
+            icon.innerHTML = `<img width="50" height="50" src="https://img.icons8.com/ios/50/snow.png" alt="cloud--v2"/>`;
+        } else {
+            icon.innerHTML = `<img width="50" height="50" src="https://img.icons8.com/ios/50/sun.png" alt="cloud--v2"/>`;
+        }
+    }
+    getWeather('Marrakech');
+    city.addEventListener('keydown', function(e) {
+        if (e.keyCode === 13) {  // 13 is the key code for Enter
+            e.preventDefault();  // Prevent the default action (form submission)
+            getWeather(city.value);  // Call your function to get the weather
+    }
+    });
+    getTime();
+    date.textContent = getDate();
+    city.value = '';
+</script>
+
 </html>
