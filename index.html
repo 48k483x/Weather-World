@@ -72,10 +72,28 @@
         return number < 10 ? '0' + number : number;
     }
     
-    function getTime() {
-        const date = new Date();
-        const hours = addLeadingZero(date.getHours());
-    const minutes = addLeadingZero(date.getMinutes());
+//     function getTime() {
+//         const date = new Date();
+//         const hours = addLeadingZero(date.getHours());
+//     const minutes = addLeadingZero(date.getMinutes());
+//     time.textContent = `${hours}:${minutes}`;
+// };
+
+function getTime(timezone) {
+    // Convert the timezone offset from seconds to milliseconds
+    const timezoneOffsetMilliseconds = timezone * 1000;
+
+    // Get the current date and time in UTC
+    const dateUtc = new Date(Date.now() + new Date().getTimezoneOffset() * 60000);
+
+    // Get the local date and time for the city
+    const dateLocal = new Date(dateUtc.getTime() + timezoneOffsetMilliseconds);
+
+    // Get the local hours and minutes
+    const hours = addLeadingZero(dateLocal.getUTCHours());
+    const minutes = addLeadingZero(dateLocal.getUTCMinutes());
+
+    // Display the local time
     time.textContent = `${hours}:${minutes}`;
 };
 
@@ -96,6 +114,8 @@
         const response = await fetch(`${url}${cityN}&appid=${apiKey}&units=${units}`);
         const data = await response.json();
         console.log(data);
+        let timezone = data.timezone;
+        getTime(timezone);
         cityName.textContent = data.name;
         foggy.textContent = data.weather[0].main;
         temperature.textContent = Math.floor(data.main.temp) + '°C';
@@ -118,7 +138,6 @@
             getWeather(city.value); 
     }
     });
-    getTime();
     date.textContent = getDate();
     city.value = '';
 </script>
